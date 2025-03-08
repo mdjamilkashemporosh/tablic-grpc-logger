@@ -1,6 +1,6 @@
 {
   "name": "tablic-grpc-logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A NestJS interceptor for logging gRPC requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,11 +15,11 @@
     "logging",
     "gRPC"
   ],
-  "author": "mdjamilkahemporoh",
+  "author": "MD Jamil Kashem Porosh",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mdjamilkahemporosh/tablic-grpc-logger.git"
+    "url": "https://github.com/mdjamilkashemporosh/tablic-grpc-logger"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.11",
