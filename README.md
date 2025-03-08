@@ -18,7 +18,9 @@ npm i tablic-grpc-logger
 ```
 
 ## Example Log Output
+![Screenshot 2025-03-08 at 10 26 34 PM](https://github.com/user-attachments/assets/c976c1a9-5f09-4788-b31e-0235bd0fb353)
 
+![Screenshot 2025-03-08 at 10 26 15 PM](https://github.com/user-attachments/assets/b901ca74-e1f1-4d8d-b77e-8ca4f924622d)
 
 ## Usage in a NestJS App
 
