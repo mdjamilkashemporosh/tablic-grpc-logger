@@ -44,7 +44,7 @@ export class LoggingInterceptor implements NestInterceptor {
                         [blue('Request Data'), JSON.stringify(request)],
                         [blue('Response Time'), magenta(`${responseTime} ms`)],
                     ];
-                    this.logger.log(
+                    console.log(
                         table(logData, {
                             border: getBorderCharacters('norc'),
                             columns: {
@@ -53,6 +53,7 @@ export class LoggingInterceptor implements NestInterceptor {
                             },
                         })
                     );
+                    
                 } catch (error) {
                     this.logger.error('Error in LoggingInterceptor:', error.stack);
                 }
