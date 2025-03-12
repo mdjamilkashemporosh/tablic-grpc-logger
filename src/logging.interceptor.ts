@@ -3,6 +3,7 @@ import {
     NestInterceptor,
     ExecutionContext,
     CallHandler,
+    Logger,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -11,6 +12,7 @@ import { green, blue, yellow, magenta, cyan, bold } from 'colorette';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
+    private readonly logger = new Logger(LoggingInterceptor.name);
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
         if (context.getType() !== 'rpc') {
             return next.handle();
@@ -30,27 +32,30 @@ export class LoggingInterceptor implements NestInterceptor {
 
         return next.handle().pipe(
             tap(() => {
-                const endTime = Date.now();
-                const responseTime = endTime - startTime;
+                try {
+                    const endTime = Date.now();
+                    const responseTime = endTime - startTime;
 
-                const logData = [
-                    [bold(cyan('Field')), bold(cyan('Value'))],
-                    [blue('Method'), green(methodName)],
-                    [blue('Client IP'), yellow(clientIp)],
-                    [blue('Metadata'), magenta(JSON.stringify(metadata.getMap(), null, 2))],
-                    [blue('Request Data'), JSON.stringify(request)],
-                    [blue('Response Time'), magenta(`${responseTime} ms`)],
-                ];
-
-                console.log(
-                    table(logData, {
-                        border: getBorderCharacters('norc'),
-                        columns: {
-                            0: { width: 15, alignment: 'left' },
-                            1: { width: 60, alignment: 'left' },
-                        },
-                    })
-                );
+                    const logData = [
+                        [bold(cyan('Field')), bold(cyan('Value'))],
+                        [blue('Method'), green(methodName)],
+                        [blue('Client IP'), yellow(clientIp)],
+                        [blue('Metadata'), magenta(JSON.stringify(metadata.getMap(), null, 2))],
+                        [blue('Request Data'), JSON.stringify(request)],
+                        [blue('Response Time'), magenta(`${responseTime} ms`)],
+                    ];
+                    this.logger.log(
+                        table(logData, {
+                            border: getBorderCharacters('norc'),
+                            columns: {
+                                0: { width: 15, alignment: 'left' },
+                                1: { width: 60, alignment: 'left' },
+                            },
+                        })
+                    );
+                } catch (error) {
+                    this.logger.error('Error in LoggingInterceptor:', error.stack);
+                }
             }),
         );
     }

@@ -3,6 +3,10 @@
     "lib": ["esnext", "dom"],
     "types": ["node"],
     "moduleResolution": "node",
+    "outDir": "dist",
     "esModuleInterop": true
-  }
+  }, 
+  "exclude": [
+    "node_modules" 
+  ]
 }

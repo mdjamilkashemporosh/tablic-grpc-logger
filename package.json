@@ -1,9 +1,8 @@
 {
   "name": "tablic-grpc-logger",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A NestJS interceptor for logging gRPC requests.",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
